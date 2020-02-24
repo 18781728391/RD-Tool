@@ -1,1 +1,1 @@
-is it good or not to check server consistency?
+Is it good or not to check server consistency?

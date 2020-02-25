@@ -1,1 +1,1 @@
-Is it good or not to check server consistency?
+trash server consistency anyway

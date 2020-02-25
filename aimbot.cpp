@@ -1,4 +1,4 @@
-// Because of this, no longer to use rd_networked_mouse 0 now.
+// Because of this, no longer using rd_networked_mouse 0 now.
 // @AutoGavy 2020.2.24
 
 #include "windows.h"

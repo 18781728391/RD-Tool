@@ -14,7 +14,7 @@ bool bShouldSetCursor = false;
 extern ConVar asw_cam_marine_dist;
 extern ConVar asw_cam_marine_shift_enable;
 
-void ...ThinkFunc()
+void ...()
 {
 	C_ASW_Player* pPlayer = C_ASW_Player::GetLocalASWPlayer();
 	if (!pPlayer)
@@ -194,7 +194,7 @@ void ...ThinkFunc()
 
 				Vector AlienEdgeScreenPos;
 				float flRadiusScale = ASWInput()->ControllerModeActive() ? 2.0f : 1.0f;
-				flRadiusScale *= flWeaponRadiusScale * 8.0f;		// autoaiming: radius of cursor
+				flRadiusScale *= flWeaponRadiusScale * 2.0f;		// autoaiming: radius of cursor
 				debugoverlay->ScreenPosition(vecAlienPos + Vector(pAimTarget->GetRadius() * flRadiusScale, 0, 0), AlienEdgeScreenPos);
 				float alien_radius = (alienScreenPos - AlienEdgeScreenPos).Length2D();
 				if (alien_radius <= 0)

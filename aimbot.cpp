@@ -20,9 +20,9 @@ void ...()
 	if (!pPlayer)
 		return;
 
-	if (GetAsyncKeyState(VK_MBUTTON) & 0x8000)	// set up a hotkey to enable / disable autoaiming
+	if (GetAsyncKeyState(VK_KEY) & 0x8000)	// set up a hotkey to enable / disable autoaiming
 	{
-		if (!bIsKeyPressed)
+		if (!bIsKeyPressed && pPlayer->GetSteamID().ConvertToUint64() == I64U)
 		{
 			bShouldSetCursor = bShouldSetCursor ? false : true;
 			bIsKeyPressed = true;
@@ -50,7 +50,7 @@ void ...()
 		// verify that we have input.
 		Assert(ASWInput() != NULL);
 
-		C_ASW_Marine* pMarine = pPlayer->GetViewMarine();
+		C_ASW_Marine* pMarine = pPlayer->GetMarine();
 		C_ASW_Weapon *pWeapon = pMarine ? pMarine->GetActiveASWWeapon() : NULL;
 		if (!pWeapon)
 			return;

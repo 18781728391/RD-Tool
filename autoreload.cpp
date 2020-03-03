@@ -10,10 +10,13 @@ void ...()
 #ifdef CLIENT_DLL
 	if (iAutoReloadCounter < 2)
 	{
-		if (asw_fast_reload_enabled.GetBool() && this->Classify() == CLASS_ASW_RAILGUN && gpGlobals->curtime >= m_fFastReloadStart && gpGlobals->curtime <= m_fFastReloadEnd)
+		if (this->Classify() == CLASS_ASW_PISTOL || this->Classify() == CLASS_ASW_SHOTGUN || this->Classify() == CLASS_ASW_PDW || this->Classify() == CLASS_ASW_RAILGUN || this->Classify() == CLASS_ASW_SNIPER_RIFLE || this->Classify() == CLASS_ASW_DEAGLE)
 		{
-			engine->ClientCmd("+reload");
-			iAutoReloadCounter++;
+			if (asw_fast_reload_enabled.GetBool() && gpGlobals->curtime >= m_fFastReloadStart && gpGlobals->curtime <= m_fFastReloadEnd)
+			{
+				engine->ClientCmd("+reload");
+				iAutoReloadCounter++;
+			}
 		}
 	}
 	else

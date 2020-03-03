@@ -10,7 +10,7 @@ void ...()
 #ifdef CLIENT_DLL
 	switch (this->Classify())
 	{
-	case CLASS_ASW_PDW:		case CLASS_ASW_SHOTGUN:	case CLASS_ASW_RAILGUN:
+	case CLASS_ASW_PDW:	case CLASS_ASW_SHOTGUN:	case CLASS_ASW_RAILGUN:
 	case CLASS_ASW_DEAGLE:	case CLASS_ASW_PISTOL:	case CLASS_ASW_SNIPER_RIFLE:
 		if (!iAutoReloadCounter)
 		{

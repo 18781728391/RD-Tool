@@ -2,27 +2,24 @@
 // @AutoGavy 2020.3.3
 
 #ifdef CLIENT_DLL
-	bool bAllowForceReload = true;
+	int iAutoReloadCounter = 0;
 #endif
 
 void ...()
 {
 #ifdef CLIENT_DLL
-	if (bAllowForceReload && asw_fast_reload_enabled.GetBool() && this->Classify() == CLASS_ASW_RAILGUN)
+	if (iAutoReloadCounter < 2)
 	{
-		if (gpGlobals->curtime >= m_fFastReloadStart && gpGlobals->curtime <= m_fFastReloadEnd)
+		if (asw_fast_reload_enabled.GetBool() && this->Classify() == CLASS_ASW_RAILGUN && gpGlobals->curtime >= m_fFastReloadStart && gpGlobals->curtime <= m_fFastReloadEnd)
 		{
 			engine->ClientCmd("+reload");
-			bAllowForceReload = false;
+			iAutoReloadCounter++;
 		}
 	}
-#endif
-
-	(...)
+	else
 	{
-#ifdef CLIENT_DLL
 		engine->ClientCmd("-reload");
-		bAllowForceReload = true;
-#endif
+		iAutoReloadCounter = 0;
 	}
+#endif
 }

@@ -8,9 +8,11 @@
 void ...()
 {
 #ifdef CLIENT_DLL
-	if (iAutoReloadCounter < 2)
+	switch (this->Classify())
 	{
-		if (this->Classify() == CLASS_ASW_PISTOL || this->Classify() == CLASS_ASW_SHOTGUN || this->Classify() == CLASS_ASW_PDW || this->Classify() == CLASS_ASW_RAILGUN || this->Classify() == CLASS_ASW_SNIPER_RIFLE || this->Classify() == CLASS_ASW_DEAGLE)
+	case CLASS_ASW_PDW:		case CLASS_ASW_SHOTGUN:	case CLASS_ASW_RAILGUN:
+	case CLASS_ASW_DEAGLE:	case CLASS_ASW_PISTOL:	case CLASS_ASW_SNIPER_RIFLE:
+		if (iAutoReloadCounter < 2 && UsesClipsForAmmo1() && m_bInReload)
 		{
 			if (asw_fast_reload_enabled.GetBool() && gpGlobals->curtime >= m_fFastReloadStart && gpGlobals->curtime <= m_fFastReloadEnd)
 			{
@@ -18,11 +20,12 @@ void ...()
 				iAutoReloadCounter++;
 			}
 		}
-	}
-	else
-	{
-		engine->ClientCmd("-reload");
-		iAutoReloadCounter = 0;
+		else
+		{
+			engine->ClientCmd("-reload");
+			iAutoReloadCounter = 0;
+		}
+		break;
 	}
 #endif
 }

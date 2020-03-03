@@ -10,21 +10,26 @@ void ...()
 #ifdef CLIENT_DLL
 	switch (this->Classify())
 	{
-	case CLASS_ASW_PDW:	case CLASS_ASW_SHOTGUN:	case CLASS_ASW_RAILGUN:
+	case CLASS_ASW_PDW:		case CLASS_ASW_SHOTGUN:	case CLASS_ASW_RAILGUN:
 	case CLASS_ASW_DEAGLE:	case CLASS_ASW_PISTOL:	case CLASS_ASW_SNIPER_RIFLE:
-		if (iAutoReloadCounter < 2 && UsesClipsForAmmo1() && m_bInReload)
+		if (!iAutoReloadCounter)
 		{
-			if (asw_fast_reload_enabled.GetBool() && gpGlobals->curtime >= m_fFastReloadStart && gpGlobals->curtime <= m_fFastReloadEnd)
+			if (UsesClipsForAmmo1() && m_bInReload)
 			{
-				engine->ClientCmd("+reload");
-				iAutoReloadCounter++;
+				if (asw_fast_reload_enabled.GetBool() && gpGlobals->curtime >= m_fFastReloadStart && gpGlobals->curtime <= m_fFastReloadEnd)
+				{
+					engine->ClientCmd("+reload");
+					iAutoReloadCounter++;
+				}
 			}
 		}
-		else
+		else if (iAutoReloadCounter > 1)
 		{
 			engine->ClientCmd("-reload");
 			iAutoReloadCounter = 0;
 		}
+		else
+			iAutoReloadCounter++;
 		break;
 	}
 #endif

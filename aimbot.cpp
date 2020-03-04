@@ -8,8 +8,8 @@
 
 #define PI 3.14159265358979
 
-bool bIsKeyPressed = false;
-bool bShouldSetCursor = false;
+static bool bIsKeyPressed = false;
+static bool bShouldSetCursor = false;
 
 extern ConVar asw_cam_marine_dist;
 extern ConVar asw_cam_marine_shift_enable;

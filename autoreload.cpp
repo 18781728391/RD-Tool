@@ -2,7 +2,7 @@
 // @AutoGavy 2020.3.3
 
 #ifdef CLIENT_DLL
-	static int iReloadCount = 0;
+	static int g_iReloadCount = 0;
 #endif
 
 void ...()
@@ -12,24 +12,24 @@ void ...()
 	{
 	case CLASS_ASW_PDW:	case CLASS_ASW_SHOTGUN:	case CLASS_ASW_RAILGUN:
 	case CLASS_ASW_DEAGLE:	case CLASS_ASW_PISTOL:	case CLASS_ASW_SNIPER_RIFLE:
-		if (!iReloadCount)
+		if (!g_iReloadCount)
 		{
 			if (UsesClipsForAmmo1() && m_bInReload)
 			{
 				if (asw_fast_reload_enabled.GetBool() && gpGlobals->curtime >= m_fFastReloadStart && gpGlobals->curtime <= m_fFastReloadEnd)
 				{
 					engine->ClientCmd("+reload");
-					iReloadCount++;
+					g_iReloadCount++;
 				}
 			}
 		}
-		else if (iReloadCount > 1)
+		else if (g_iReloadCount > 1)
 		{
 			engine->ClientCmd("-reload");
-			iReloadCount = 0;
+			g_iReloadCount = 0;
 		}
 		else
-			iReloadCount++;
+			g_iReloadCount++;
 		break;
 	}
 #endif

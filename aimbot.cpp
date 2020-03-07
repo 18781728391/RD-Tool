@@ -8,8 +8,8 @@
 
 #define PI 3.14159265358979
 
-static bool bIsKeyPressed = false;
-static bool bShouldSetCursor = false;
+static bool g_bIsKeyPressed = false;
+static bool g_bShouldSetCursor = false;
 
 extern ConVar asw_cam_marine_dist;
 extern ConVar asw_cam_marine_shift_enable;
@@ -22,11 +22,11 @@ void ...()
 
 	if (GetAsyncKeyState(VK_KEY) & 0x8000)	// set up a hotkey to enable / disable autoaiming
 	{
-		if (!bIsKeyPressed && pPlayer->GetSteamID().ConvertToUint64() == I64U)
+		if (!g_bIsKeyPressed && pPlayer->GetSteamID().ConvertToUint64() == I64U)
 		{
-			bShouldSetCursor = bShouldSetCursor ? false : true;
-			bIsKeyPressed = true;
-			if (bShouldSetCursor)
+			g_bShouldSetCursor = g_bShouldSetCursor ? false : true;
+			g_bIsKeyPressed = true;
+			if (g_bShouldSetCursor)
 			{
 				// setting new view field
 				asw_cam_marine_dist.SetValue(512);
@@ -43,9 +43,9 @@ void ...()
 		}
 	}
 	else
-		bIsKeyPressed = false;
+		g_bIsKeyPressed = false;
 
-	if (bShouldSetCursor)
+	if (g_bShouldSetCursor)
 	{
 		// verify that we have input.
 		Assert(ASWInput() != NULL);

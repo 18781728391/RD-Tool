@@ -2,6 +2,7 @@
 // @AutoGavy 2020.3.3
 
 #ifdef CLIENT_DLL
+	static float g_flRandomTimeScale = 0.5f;
 	static int g_iReloadCount = 0;
 #endif
 
@@ -16,9 +17,12 @@ void ...()
 		{
 			if (UsesClipsForAmmo1() && m_bInReload)
 			{
-				if (asw_fast_reload_enabled.GetBool() && gpGlobals->curtime >= m_fFastReloadStart && gpGlobals->curtime <= m_fFastReloadEnd)
+				if (asw_fast_reload_enabled.GetBool() &&
+					gpGlobals->curtime >= m_fFastReloadStart + (m_fFastReloadEnd - m_fFastReloadStart) * g_flRandomTimeScale &&
+					gpGlobals->curtime <= m_fFastReloadEnd)
 				{
 					engine->ClientCmd("+reload");
+					g_flRandomTimeScale = random->RandomInt(1, 8) * 0.1f;
 					g_iReloadCount++;
 				}
 			}

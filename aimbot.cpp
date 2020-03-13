@@ -108,13 +108,6 @@ void ...()
 		CASW_Trace_Filter filter(pMarine, COLLISION_GROUP_NONE);
 		// do a trace into the world to see what we've pointing directly at
 		UTIL_TraceLine(vCameraLocation, vTraceEnd, nTraceMask, &filter, &tr);
-		if (tr.fraction >= 1.0f)
-		{
-			if (!pMarine)
-				return;
-			float flFloorZ = (pMarine->GetRenderOrigin() + Vector(0, 0, ASW_MARINE_GUN_OFFSET_Z)).z;
-		}
-
 
 		if (!pMarine)
 		{

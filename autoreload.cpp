@@ -22,7 +22,7 @@ void ...()
 					gpGlobals->curtime <= m_fFastReloadEnd)
 				{
 					engine->ClientCmd("+reload");
-					g_flRandomTimeScale = random->RandomInt(1, 8) * 0.1f;
+					g_flRandomTimeScale = random->RandomInt(0, 7) * 0.1f;
 					g_iReloadCount++;
 				}
 			}

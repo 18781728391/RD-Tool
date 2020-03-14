@@ -2,7 +2,7 @@
 // @AutoGavy 2020.3.3
 
 #ifdef CLIENT_DLL
-	static float g_flRandomTimeScale = 0.5f;
+	static float g_flRandomTimeScale = 0.3f;
 	static int g_iReloadCount = 0;
 #endif
 
@@ -22,7 +22,7 @@ void ...()
 					gpGlobals->curtime <= m_fFastReloadEnd)
 				{
 					engine->ClientCmd("+reload");
-					g_flRandomTimeScale = random->RandomInt(0, 7) * 0.1f;
+					g_flRandomTimeScale = random->RandomInt(0, 6) * 0.1f;
 					g_iReloadCount++;
 				}
 			}
